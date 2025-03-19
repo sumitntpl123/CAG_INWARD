@@ -117,6 +117,7 @@ namespace CAG_INWARD
         private void deButtonSave_Click(object sender, EventArgs e)
         {
             OdbcCommand sqlCmdPolicy = new OdbcCommand();
+            OdbcCommand sqlCmdPolicy1 = new OdbcCommand();
             OdbcCommand sqlRawdata = new OdbcCommand();
             try
             {
@@ -124,6 +125,12 @@ namespace CAG_INWARD
                 sqlCmdPolicy.Connection = sqlCon; ;
                 sqlCmdPolicy.CommandText = sqlStr;
                 sqlCmdPolicy.ExecuteNonQuery();
+
+                string sqlStr1 = "update tbl_inward_dtl set VEND_RECIPT = '" + cmbdigiRecpt.Text + "',VEND_RECPT_DT = '" + dtpdigi_recipt + "',VEND_RMK = '' where batch_key  = '" + cmbBatch.SelectedValue.ToString() + "'";
+                sqlCmdPolicy1.Connection = sqlCon; ;
+                sqlCmdPolicy1.CommandText = sqlStr1;
+                sqlCmdPolicy1.ExecuteNonQuery();
+
                 updateBatchStatus();
                 populateBatch();
                 MessageBox.Show(this, "Record Recived Successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
