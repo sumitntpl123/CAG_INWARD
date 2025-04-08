@@ -126,7 +126,9 @@ namespace CAG_INWARD
 
         private void inwardEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmInward1 inward = new frmInward1(sqlCon, crd);
+            //frmInward1 inward = new frmInward1(sqlCon, crd);
+            //inward.ShowDialog(this);
+            frmInwardNew inward = new frmInwardNew(sqlCon, crd);
             inward.ShowDialog(this);
         }
 
@@ -183,11 +185,20 @@ namespace CAG_INWARD
                 crd = rbc.getCredentials(p);
 
                 name = crd.userName;
+                if(crd.role == "Nevaeh")
+                {
+                    downloadCSVToolStripMenuItem.Visible = true;
+                }
+                if(crd.role == "Admin")
+                {
+                    createUserToolStripMenuItem.Visible = true;
+                }
                 
                 if(crd.role == "RecordRoom")
                 {
                     digitisationDeptEntryToolStripMenuItem.Visible = false;
                     nevaehInwardOutwardToolStripMenuItem.Visible = false;
+                    inventoryReceiptToolStripMenuItem.Visible = true;
                 }
                 if (crd.role == "Digitisation")
                 {
@@ -203,6 +214,12 @@ namespace CAG_INWARD
                     createBatchToolStripMenuItem.Visible = false;
                 }
                 if (crd.role == "PensionAdmin")
+                {
+                    digitisationDeptEntryToolStripMenuItem.Visible = false;
+                    nevaehInwardOutwardToolStripMenuItem.Visible = false;
+                    inventoryReceiptToolStripMenuItem.Visible = true;
+                }
+                if (crd.role == "GPFAdmin")
                 {
                     digitisationDeptEntryToolStripMenuItem.Visible = false;
                     nevaehInwardOutwardToolStripMenuItem.Visible = false;
@@ -260,6 +277,41 @@ namespace CAG_INWARD
         {
             frmNevaeh nevaeh = new frmNevaeh(sqlCon, crd);
             nevaeh.ShowDialog();
+        }
+
+        private void downloadCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDownloadCSV down = new frmDownloadCSV(sqlCon, crd);
+            down.ShowDialog(this);
+        }
+
+        private void inwardReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInwardReport report = new frmInwardReport(sqlCon, crd);
+            report.ShowDialog(this);
+        }
+
+        private void inventoryReceiptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInwardPA pa = new frmInwardPA(sqlCon, crd);
+            pa.ShowDialog(this);
+        }
+
+        private void entryReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1(sqlCon, crd);
+            frm.ShowDialog(this);
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PwdChange pwdCh = new PwdChange(ref p, getCPwd);
+            pwdCh.ShowDialog(this);
+        }
+        void getCPwd(ref NovaNet.Utils.Profile prmpwd)
+        {
+            p = prmpwd;
+            rbc.changePassword(p.UserId, p.UserName, p.Password);
         }
     }
 }

@@ -127,11 +127,12 @@ namespace CAG_INWARD
                 return;
             }
             string Gpo_no = txtfileNo.Text + "/" + cmbFinancialyear.Text;
+            string rackno = txtBundleNo.Text + "/" + txtRackNo.Text + "/" + txtShelfNo.Text;
             OdbcCommand sqlCmdPolicy = new OdbcCommand();
             OdbcCommand sqlRawdata = new OdbcCommand();
             try
             {
-                string sqlStr = "insert into tbl_inward_dtl(sendingDate,groupName,BRSNo,Record_type,FileGPFNO,Section,year,page_count,pensioner_name,batch_key) values ('" + dtpSendingDate.Text + "','" + txtGroupNmae.Text + "','" + mskBRS.Text + "','" + cmbRecordtype.Text + "','" + Gpo_no+ "','" + cmbsection.SelectedValue.ToString() + "','" + txtYear.Text + "','"+txtpage_count.Text.Trim()+"','"+txtPensioerName.Text.Trim()+"','"+cmbBatch.SelectedValue.ToString()+"')";
+                string sqlStr = "insert into tbl_inward_dtl(sendingDate,groupName,BRSNo,Record_type,FileGPFNO,Section,year,page_count,pensioner_name,batch_key) values ('" + dtpSendingDate.Text + "','" + txtGroupNmae.Text + "','" + rackno + "','" + cmbRecordtype.Text + "','" + Gpo_no+ "','" + cmbsection.SelectedValue.ToString() + "','" + txtYear.Text + "','"+txtpage_count.Text.Trim()+"','"+txtPensioerName.Text.Trim()+"','"+cmbBatch.SelectedValue.ToString()+"')";
                 sqlCmdPolicy.Connection = sqlCon;;
                 sqlCmdPolicy.CommandText = sqlStr;
 
@@ -152,7 +153,7 @@ namespace CAG_INWARD
                     {
                         clearFields();
                         ShowEnteredData();
-                        mskBRS.Focus();
+                        txtBundleNo.Focus();
                     }
                     else
                     {
@@ -172,7 +173,9 @@ namespace CAG_INWARD
         }
         private void clearFields()
         {
-            mskBRS.Text = "";
+            txtBundleNo.Text = "";
+            txtRackNo.Text = "";
+            txtShelfNo.Text = "";
             txtfileNo.Text = "";
             cmbFinancialyear.Text = "";
             txtPensioerName.Text = "";
@@ -241,7 +244,7 @@ namespace CAG_INWARD
 
         private void cmbFinancialyear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtYear.Text = cmbFinancialyear.Text.Substring(0, 4).ToString();
+            txtYear.Text = cmbFinancialyear.Text;
         }
 
         private void mskBRS_KeyUp(object sender, KeyEventArgs e)
@@ -274,6 +277,21 @@ namespace CAG_INWARD
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtBundleNo_Leave(object sender, EventArgs e)
+        {
+            txtBundleNo.Text = txtBundleNo.Text.PadLeft(3, '0');
+        }
+
+        private void txtRackNo_Leave(object sender, EventArgs e)
+        {
+            txtRackNo.Text = txtRackNo.Text.PadLeft(2, '0');
+        }
+
+        private void txtShelfNo_Leave(object sender, EventArgs e)
+        {
+            txtShelfNo.Text = txtShelfNo.Text.PadLeft(2, '0');
         }
     }
 }

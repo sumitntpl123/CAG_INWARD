@@ -17,6 +17,7 @@ namespace CAG_INWARD
     {
         OdbcConnection sqlCon = null;
         Credentials crd = new Credentials();
+        private string Mode = string.Empty;
         public frmDigiDEPT(OdbcConnection prmCon, Credentials prmCrd)
         {
             sqlCon = prmCon;
@@ -54,12 +55,20 @@ namespace CAG_INWARD
             if (cmbBatch.Text != "")
             {
                 populateRecord();
+                populateInwardDetails();
             }
+        }
+        public void populateInwardDetails()
+        {
+            DataTable dt = new DataTable();
+            string sqlStr = "select batch_code,batch_key from batch_master where status = '2' and digi_recipt = 'YES'";
+            OdbcDataAdapter odap = new OdbcDataAdapter(sqlStr, sqlCon);
+            odap.Fill(dt);
         }
         private void populateRecord()
         {
             DataTable dt = new DataTable();
-            string sqlstr = "select sendingDate,groupName,BRSNo,Record_type,FileGPFNO,Section,year,pensioner_name,page_count from tbl_inward_dtl where batch_key  = '" + cmbBatch.SelectedValue.ToString()+"'";
+            string sqlstr = "select department,subcat,state_name,filename,emp_name,desg,fileid,birth_date,joining_date,death_date,retirement_date,psa_name,section,pension_file_no,ppo_fppo,gpo_dgpo,mobile,hrms_id,spouce,created_by,created_dttm,BRSNo,page_count,Sending_date from metadata_entry where batch_key  = '" + cmbBatch.SelectedValue.ToString()+"'";
             OdbcDataAdapter odap = new OdbcDataAdapter(sqlstr, sqlCon);
             odap.Fill(dt);
 
@@ -89,10 +98,14 @@ namespace CAG_INWARD
 
         private void frmDigiDEPT_Load(object sender, EventArgs e)
         {
+            cmbdigiRecpt.Items.Add("");
             cmbdigiRecpt.Items.Add("YES");
             cmbdigiRecpt.Items.Add("NO");
+            cmbdigireturn.Items.Add("");
             cmbdigireturn.Items.Add("YES");
             cmbdigireturn.Items.Add("NO");
+            cmbdigireturn.Enabled = false;
+            dtpdigi_return.Enabled = false;
         }
 
         private void cmbdigiRecpt_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,14 +124,37 @@ namespace CAG_INWARD
             OdbcCommand sqlCmdPolicy1 = new OdbcCommand();
             OdbcCommand sqlRawdata = new OdbcCommand();
             OdbcCommand sqlRawdata1 = new OdbcCommand();
+            string sqlStr = string.Empty;
+            string sql = string.Empty;
             try
             {
-                string sqlStr = "update tbl_inward_dtl set DIGI_CELL_RECPT = '"+cmbdigiRecpt.Text+"',DIGI_CELL_RECT_DT = '"+ dtpdigi_recipt.Text + "',DIGI_CELL_REMK = '"+txtdigiremark.Text+"' where batch_key  = '"+cmbBatch.SelectedValue.ToString()+"'";
+                if (ckhState.Checked == true)
+                {
+                    if (cmbdigireturn.Text == "")
+                    {
+                        MessageBox.Show(this, "Please Select YES/ NO", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbdigireturn.Focus();
+                        return;
+                    }
+                    sqlStr = "update metadata_entry set DIGI_CELL_RETRN = '" + cmbdigiRecpt.Text + "',DIGI_CELL_RETRN_DT = '" + dtpdigi_recipt.Text + "',DIGI_CELL_REMK = '" + txtdigiremark.Text + "' where batch_key  = '" + cmbBatch.SelectedValue.ToString() + "'";
+                    sql = "update Batch_master set digi_return = '" + cmbdigireturn.Text + "',digi_return_dt = '" + dtpdigi_return.Text + "',digi_rmk = '" + txtdigiremark.Text + "' where batch_key  = '" + cmbBatch.SelectedValue.ToString() + "'";
+               }
+                else
+                {
+                    if (cmbdigiRecpt.Text == "")
+                    {
+                        MessageBox.Show(this, "Please Select YES/ NO", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbdigiRecpt.Focus();
+                        return;
+                    }
+                    sqlStr = "update metadata_entry set DIGI_CELL_RECPT = '" + cmbdigiRecpt.Text + "',DIGI_CELL_RECT_DT = '" + dtpdigi_recipt.Text + "',DIGI_CELL_REMK = '" + txtdigiremark.Text + "' where batch_key  = '" + cmbBatch.SelectedValue.ToString() + "'";
+                    sql = "update Batch_master set digi_recipt = '" + cmbdigiRecpt.Text + "',digi_recipt_dt = '" + dtpdigi_recipt.Text + "',digi_rmk = '" + txtdigiremark.Text + "' where batch_key  = '" + cmbBatch.SelectedValue.ToString() + "'";
+                }
                 sqlCmdPolicy.Connection = sqlCon; ;
                 sqlCmdPolicy.CommandText = sqlStr;
                 sqlCmdPolicy.ExecuteNonQuery();
 
-                string sql = "update Batch_master set digi_recipt = '" + cmbdigiRecpt.Text + "',digi_recipt_dt = '" + dtpdigi_recipt.Text + "',digi_rmk = '" + txtdigiremark.Text + "' where batch_key  = '" + cmbBatch.SelectedValue.ToString() + "'";
+                
                 sqlCmdPolicy1.Connection = sqlCon; ;
                 sqlCmdPolicy1.CommandText = sql;
                 sqlCmdPolicy1.ExecuteNonQuery();
@@ -126,8 +162,14 @@ namespace CAG_INWARD
                 updateBatchStatus();
                 populateBatch();
                 MessageBox.Show(this, "Record Recived Successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvMain.Columns.Clear();
                 dgvMain.DataSource = null;
-
+                cmbdigiRecpt.Text = "";
+                dtpdigi_recipt.Text = "";
+                cmbdigireturn.Text = "";
+                dtpdigi_return.Text = "";
+                txtdigiremark.Text = "";
+                ckhState.Checked = false;
             }
             catch (Exception ex)
             {
@@ -150,6 +192,55 @@ namespace CAG_INWARD
                 MessageBox.Show(this, ex.Message.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void ckhState_CheckedChanged(object sender, EventArgs e)
+        {
+            if(ckhState.Checked == true)
+            {
+                Mode = "OUT";
+                cmbdigireturn.Enabled = true;
+                cmbdigiRecpt.Enabled = false;
+                dgvMain.Columns.Clear();
+                dgvMain.DataSource = null;
+                populateBatchOutwardBAtches();
+            }
+            else
+            {
+                Mode = "IN";
+                cmbdigireturn.Enabled = false;
+                dtpdigi_return.Enabled = false;
+                cmbdigiRecpt.Enabled = true;
+                cmbBatch.DataSource = null;
+                dgvMain.Columns.Clear();
+                dgvMain.DataSource = null;
+                populateBatch();
+            }
+        }
+
+        public void populateBatchOutwardBAtches()
+        {
+            DataTable dt = new DataTable();
+            string sqlStr = "select batch_code,batch_key from batch_master where status = '3' and digi_recipt = 'YES' and vendor_return = 'YES'";
+            OdbcDataAdapter odap = new OdbcDataAdapter(sqlStr, sqlCon);
+            odap.Fill(dt);
+            cmbBatch.DataSource = null;
+
+            if (dt.Rows.Count > 0)
+            {
+                cmbBatch.DataSource = null;
+                cmbBatch.DataSource = dt;
+                cmbBatch.DisplayMember = "batch_code";
+                cmbBatch.ValueMember = "batch_key";
+                cmbBatch.SelectedIndex = 0;
+                dgvMain.Columns.Clear();
+                dgvMain.DataSource = null;
+                
+            }
+            else 
+            {
+                cmbBatch.DataSource = null;
+            }
         }
     }
 }

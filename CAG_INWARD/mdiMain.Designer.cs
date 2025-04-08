@@ -38,12 +38,15 @@ namespace CAG_INWARD
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.createBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inwardEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryReceiptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.digitisationDeptEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nevaehInwardOutwardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inwardReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -57,6 +60,8 @@ namespace CAG_INWARD
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.entryReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -67,6 +72,7 @@ namespace CAG_INWARD
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.toolsToolStripMenuItem,
+            this.reportToolStripMenuItem,
             this.logoutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -82,6 +88,7 @@ namespace CAG_INWARD
             this.toolStripSeparator5,
             this.createBatchToolStripMenuItem,
             this.inwardEntryToolStripMenuItem,
+            this.inventoryReceiptToolStripMenuItem,
             this.digitisationDeptEntryToolStripMenuItem,
             this.nevaehInwardOutwardToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -120,6 +127,14 @@ namespace CAG_INWARD
             this.inwardEntryToolStripMenuItem.Text = "&Inward Entry";
             this.inwardEntryToolStripMenuItem.Click += new System.EventHandler(this.inwardEntryToolStripMenuItem_Click);
             // 
+            // inventoryReceiptToolStripMenuItem
+            // 
+            this.inventoryReceiptToolStripMenuItem.Name = "inventoryReceiptToolStripMenuItem";
+            this.inventoryReceiptToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.inventoryReceiptToolStripMenuItem.Text = "Inventory Receipt";
+            this.inventoryReceiptToolStripMenuItem.Visible = false;
+            this.inventoryReceiptToolStripMenuItem.Click += new System.EventHandler(this.inventoryReceiptToolStripMenuItem_Click);
+            // 
             // digitisationDeptEntryToolStripMenuItem
             // 
             this.digitisationDeptEntryToolStripMenuItem.Name = "digitisationDeptEntryToolStripMenuItem";
@@ -131,7 +146,7 @@ namespace CAG_INWARD
             // 
             this.nevaehInwardOutwardToolStripMenuItem.Name = "nevaehInwardOutwardToolStripMenuItem";
             this.nevaehInwardOutwardToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.nevaehInwardOutwardToolStripMenuItem.Text = "Nevaeh Inward / Outward";
+            this.nevaehInwardOutwardToolStripMenuItem.Text = "Service Provider Inward / Outward";
             this.nevaehInwardOutwardToolStripMenuItem.Click += new System.EventHandler(this.nevaehInwardOutwardToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
@@ -145,6 +160,7 @@ namespace CAG_INWARD
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createUserToolStripMenuItem,
+            this.changePasswordToolStripMenuItem,
             this.downloadCSVToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
@@ -155,6 +171,7 @@ namespace CAG_INWARD
             this.createUserToolStripMenuItem.Name = "createUserToolStripMenuItem";
             this.createUserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.createUserToolStripMenuItem.Text = "&Create User";
+            this.createUserToolStripMenuItem.Visible = false;
             this.createUserToolStripMenuItem.Click += new System.EventHandler(this.createUserToolStripMenuItem_Click);
             // 
             // downloadCSVToolStripMenuItem
@@ -162,6 +179,24 @@ namespace CAG_INWARD
             this.downloadCSVToolStripMenuItem.Name = "downloadCSVToolStripMenuItem";
             this.downloadCSVToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.downloadCSVToolStripMenuItem.Text = "&Download CSV";
+            this.downloadCSVToolStripMenuItem.Visible = false;
+            this.downloadCSVToolStripMenuItem.Click += new System.EventHandler(this.downloadCSVToolStripMenuItem_Click);
+            // 
+            // reportToolStripMenuItem
+            // 
+            this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.entryReportToolStripMenuItem,
+            this.inwardReportToolStripMenuItem});
+            this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.reportToolStripMenuItem.Text = "&Report";
+            // 
+            // inwardReportToolStripMenuItem
+            // 
+            this.inwardReportToolStripMenuItem.Name = "inwardReportToolStripMenuItem";
+            this.inwardReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.inwardReportToolStripMenuItem.Text = "Inward Report";
+            this.inwardReportToolStripMenuItem.Click += new System.EventHandler(this.inwardReportToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
@@ -275,6 +310,20 @@ namespace CAG_INWARD
             this.toolStripStatusLabel.Size = new System.Drawing.Size(240, 17);
             this.toolStripStatusLabel.Text = "Developed By Nevaeh Technology Pvt Ltd";
             // 
+            // entryReportToolStripMenuItem
+            // 
+            this.entryReportToolStripMenuItem.Name = "entryReportToolStripMenuItem";
+            this.entryReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.entryReportToolStripMenuItem.Text = "Entry Report";
+            this.entryReportToolStripMenuItem.Click += new System.EventHandler(this.entryReportToolStripMenuItem_Click);
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changePasswordToolStripMenuItem.Text = "Change Password";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
             // mdiMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,6 +379,11 @@ namespace CAG_INWARD
         private System.Windows.Forms.ToolStripMenuItem createUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nevaehInwardOutwardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inwardReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryReceiptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem entryReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
     }
 }
 

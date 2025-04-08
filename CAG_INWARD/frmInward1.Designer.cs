@@ -36,11 +36,15 @@ namespace CAG_INWARD
             this.deButtonCancel = new nControls.deButton();
             this.deButtonSave = new nControls.deButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtShelfNo = new nControls.deTextBox();
+            this.deLabel12 = new nControls.deLabel();
+            this.txtRackNo = new nControls.deTextBox();
+            this.deLabel11 = new nControls.deLabel();
+            this.txtBundleNo = new nControls.deTextBox();
             this.cmbFinancialyear = new nControls.deComboBox();
             this.cmbsection = new nControls.deComboBox();
             this.deLabel3 = new nControls.deLabel();
             this.cmbRecordtype = new nControls.deTextBox();
-            this.mskBRS = new System.Windows.Forms.MaskedTextBox();
             this.deLabel10 = new nControls.deLabel();
             this.txtpage_count = new nControls.deTextBox();
             this.deLabel9 = new nControls.deLabel();
@@ -138,7 +142,7 @@ namespace CAG_INWARD
             this.deButtonSave.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.deButtonSave.Name = "deButtonSave";
             this.deButtonSave.Size = new System.Drawing.Size(90, 35);
-            this.deButtonSave.TabIndex = 6;
+            this.deButtonSave.TabIndex = 10;
             this.deButtonSave.Text = "&Save";
             this.deButtonSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.deButtonSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -149,11 +153,15 @@ namespace CAG_INWARD
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.Controls.Add(this.txtShelfNo);
+            this.groupBox1.Controls.Add(this.deLabel12);
+            this.groupBox1.Controls.Add(this.txtRackNo);
+            this.groupBox1.Controls.Add(this.deLabel11);
+            this.groupBox1.Controls.Add(this.txtBundleNo);
             this.groupBox1.Controls.Add(this.cmbFinancialyear);
             this.groupBox1.Controls.Add(this.cmbsection);
             this.groupBox1.Controls.Add(this.deLabel3);
             this.groupBox1.Controls.Add(this.cmbRecordtype);
-            this.groupBox1.Controls.Add(this.mskBRS);
             this.groupBox1.Controls.Add(this.deLabel10);
             this.groupBox1.Controls.Add(this.txtpage_count);
             this.groupBox1.Controls.Add(this.deLabel9);
@@ -179,6 +187,67 @@ namespace CAG_INWARD
             this.groupBox1.Text = "Record Entry Form";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // txtShelfNo
+            // 
+            this.txtShelfNo.BackColor = System.Drawing.Color.White;
+            this.txtShelfNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShelfNo.ForeColor = System.Drawing.Color.Black;
+            this.txtShelfNo.Location = new System.Drawing.Point(444, 87);
+            this.txtShelfNo.Mandatory = true;
+            this.txtShelfNo.MaxLength = 2;
+            this.txtShelfNo.Name = "txtShelfNo";
+            this.txtShelfNo.Size = new System.Drawing.Size(48, 23);
+            this.txtShelfNo.TabIndex = 2;
+            this.txtShelfNo.Leave += new System.EventHandler(this.txtShelfNo_Leave);
+            // 
+            // deLabel12
+            // 
+            this.deLabel12.AutoSize = true;
+            this.deLabel12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deLabel12.ForeColor = System.Drawing.Color.Black;
+            this.deLabel12.Location = new System.Drawing.Point(364, 93);
+            this.deLabel12.Name = "deLabel12";
+            this.deLabel12.Size = new System.Drawing.Size(61, 15);
+            this.deLabel12.TabIndex = 26;
+            this.deLabel12.Text = "Shelf No :";
+            // 
+            // txtRackNo
+            // 
+            this.txtRackNo.BackColor = System.Drawing.Color.White;
+            this.txtRackNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRackNo.ForeColor = System.Drawing.Color.Black;
+            this.txtRackNo.Location = new System.Drawing.Point(309, 89);
+            this.txtRackNo.Mandatory = true;
+            this.txtRackNo.MaxLength = 2;
+            this.txtRackNo.Name = "txtRackNo";
+            this.txtRackNo.Size = new System.Drawing.Size(48, 23);
+            this.txtRackNo.TabIndex = 1;
+            this.txtRackNo.Leave += new System.EventHandler(this.txtRackNo_Leave);
+            // 
+            // deLabel11
+            // 
+            this.deLabel11.AutoSize = true;
+            this.deLabel11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deLabel11.ForeColor = System.Drawing.Color.Black;
+            this.deLabel11.Location = new System.Drawing.Point(241, 93);
+            this.deLabel11.Name = "deLabel11";
+            this.deLabel11.Size = new System.Drawing.Size(59, 15);
+            this.deLabel11.TabIndex = 24;
+            this.deLabel11.Text = "Rack No :";
+            // 
+            // txtBundleNo
+            // 
+            this.txtBundleNo.BackColor = System.Drawing.Color.White;
+            this.txtBundleNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBundleNo.ForeColor = System.Drawing.Color.Black;
+            this.txtBundleNo.Location = new System.Drawing.Point(183, 89);
+            this.txtBundleNo.Mandatory = true;
+            this.txtBundleNo.MaxLength = 3;
+            this.txtBundleNo.Name = "txtBundleNo";
+            this.txtBundleNo.Size = new System.Drawing.Size(48, 23);
+            this.txtBundleNo.TabIndex = 0;
+            this.txtBundleNo.Leave += new System.EventHandler(this.txtBundleNo_Leave);
+            // 
             // cmbFinancialyear
             // 
             this.cmbFinancialyear.BackColor = System.Drawing.Color.White;
@@ -188,7 +257,7 @@ namespace CAG_INWARD
             this.cmbFinancialyear.Mandatory = true;
             this.cmbFinancialyear.Name = "cmbFinancialyear";
             this.cmbFinancialyear.Size = new System.Drawing.Size(155, 21);
-            this.cmbFinancialyear.TabIndex = 2;
+            this.cmbFinancialyear.TabIndex = 5;
             this.cmbFinancialyear.SelectedIndexChanged += new System.EventHandler(this.cmbFinancialyear_SelectedIndexChanged);
             // 
             // cmbsection
@@ -201,7 +270,7 @@ namespace CAG_INWARD
             this.cmbsection.Mandatory = true;
             this.cmbsection.Name = "cmbsection";
             this.cmbsection.Size = new System.Drawing.Size(309, 21);
-            this.cmbsection.TabIndex = 3;
+            this.cmbsection.TabIndex = 6;
             // 
             // deLabel3
             // 
@@ -224,18 +293,7 @@ namespace CAG_INWARD
             this.cmbRecordtype.Mandatory = true;
             this.cmbRecordtype.Name = "cmbRecordtype";
             this.cmbRecordtype.Size = new System.Drawing.Size(309, 23);
-            this.cmbRecordtype.TabIndex = 21;
-            // 
-            // mskBRS
-            // 
-            this.mskBRS.BeepOnError = true;
-            this.mskBRS.Location = new System.Drawing.Point(183, 88);
-            this.mskBRS.Mask = "000/00/00";
-            this.mskBRS.Name = "mskBRS";
-            this.mskBRS.Size = new System.Drawing.Size(181, 20);
-            this.mskBRS.TabIndex = 0;
-            this.mskBRS.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
-            this.mskBRS.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mskBRS_KeyUp);
+            this.cmbRecordtype.TabIndex = 3;
             // 
             // deLabel10
             // 
@@ -257,7 +315,7 @@ namespace CAG_INWARD
             this.txtpage_count.Mandatory = true;
             this.txtpage_count.Name = "txtpage_count";
             this.txtpage_count.Size = new System.Drawing.Size(309, 23);
-            this.txtpage_count.TabIndex = 5;
+            this.txtpage_count.TabIndex = 9;
             this.txtpage_count.TextChanged += new System.EventHandler(this.txtpage_count_TextChanged);
             // 
             // deLabel9
@@ -280,7 +338,7 @@ namespace CAG_INWARD
             this.txtPensioerName.Mandatory = true;
             this.txtPensioerName.Name = "txtPensioerName";
             this.txtPensioerName.Size = new System.Drawing.Size(309, 23);
-            this.txtPensioerName.TabIndex = 4;
+            this.txtPensioerName.TabIndex = 8;
             this.txtPensioerName.Leave += new System.EventHandler(this.txtPensioerName_Leave);
             // 
             // deLabel8
@@ -304,7 +362,7 @@ namespace CAG_INWARD
             this.txtYear.Mandatory = true;
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(309, 23);
-            this.txtYear.TabIndex = 14;
+            this.txtYear.TabIndex = 7;
             // 
             // deLabel7
             // 
@@ -337,7 +395,7 @@ namespace CAG_INWARD
             this.txtfileNo.Mandatory = true;
             this.txtfileNo.Name = "txtfileNo";
             this.txtfileNo.Size = new System.Drawing.Size(130, 23);
-            this.txtfileNo.TabIndex = 1;
+            this.txtfileNo.TabIndex = 4;
             // 
             // deLabel5
             // 
@@ -357,9 +415,9 @@ namespace CAG_INWARD
             this.deLabel4.ForeColor = System.Drawing.Color.Black;
             this.deLabel4.Location = new System.Drawing.Point(25, 89);
             this.deLabel4.Name = "deLabel4";
-            this.deLabel4.Size = new System.Drawing.Size(57, 15);
+            this.deLabel4.Size = new System.Drawing.Size(71, 15);
             this.deLabel4.TabIndex = 7;
-            this.deLabel4.Text = "BRS NO :";
+            this.deLabel4.Text = "Bundle No :";
             // 
             // deLabel2
             // 
@@ -426,6 +484,7 @@ namespace CAG_INWARD
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.ReadOnly = true;
             this.dgvMain.RowHeadersVisible = false;
+            this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.Size = new System.Drawing.Size(693, 382);
             this.dgvMain.TabIndex = 0;
             // 
@@ -493,7 +552,6 @@ namespace CAG_INWARD
         private nControls.deLabel deLabel1;
         private nControls.deTextBox txtGroupNmae;
         private nControls.deDateBox dtpSendingDate;
-        private System.Windows.Forms.MaskedTextBox mskBRS;
         private nControls.deLabel deLabel10;
         private nControls.deTextBox txtpage_count;
         private nControls.deLabel deLabel9;
@@ -506,5 +564,10 @@ namespace CAG_INWARD
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private nControls.deTextBox txtShelfNo;
+        private nControls.deLabel deLabel12;
+        private nControls.deTextBox txtRackNo;
+        private nControls.deLabel deLabel11;
+        private nControls.deTextBox txtBundleNo;
     }
 }

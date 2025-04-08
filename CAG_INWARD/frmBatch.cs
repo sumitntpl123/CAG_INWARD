@@ -45,6 +45,12 @@ namespace CAG_INWARD
                 deComboBox1.Enabled = false;
                 deComboBox1_Leave(this, e);
             }
+            if (crd.role == "GPFAdmin")
+            {
+                deComboBox1.SelectedIndex = 1;
+                deComboBox1.Enabled = false;
+                deComboBox1_Leave(this, e);
+            }
         }
         private void populateDeptCat()
         {
@@ -169,14 +175,14 @@ namespace CAG_INWARD
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
 
-            string sql = "select Count(*) from batch_master where dept_name = '" + dep + "' and category = '" + subCat + "'";
+            string sql = "select MaxRecordValue from tbl_serial where Batchkey = 'Batch' ";
 
             OdbcDataAdapter odap = new OdbcDataAdapter(sql, sqlCon);
             odap.Fill(dt);
 
             int count = Convert.ToInt32(dt.Rows[0][0].ToString());
 
-            string getCount = Convert.ToString(count + 1);
+            string getCount = Convert.ToString(count);
 
             return getCount;
         }
@@ -211,7 +217,8 @@ namespace CAG_INWARD
 
                 if (i > 0)
                 {
-                    MessageBox.Show(this, "Batch Created Successfully!!!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Batch No : "+textBox3.Text+ " Created Successfully!!!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    updateSerial();
                     this.Close();
                 }
                 else
@@ -223,6 +230,15 @@ namespace CAG_INWARD
             {
                 MessageBox.Show(this, ex.Message.ToString() + "Contact Neaveh Technology", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void updateSerial()
+        {
+            OdbcCommand sqlCmdPolicy = new OdbcCommand();
+            OdbcCommand sqlRawdata = new OdbcCommand();
+            string sqlstr = "update tbl_serial set MaxRecordValue = MaxRecordValue +1 ";
+            sqlCmdPolicy.Connection = sqlCon;
+            sqlCmdPolicy.CommandText = sqlstr;
+            sqlCmdPolicy.ExecuteNonQuery();
         }
     }
 }

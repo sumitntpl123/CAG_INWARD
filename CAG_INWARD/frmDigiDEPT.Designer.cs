@@ -31,8 +31,10 @@ namespace CAG_INWARD
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDigiDEPT));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cmdShow = new System.Windows.Forms.Button();
             this.cmbBatch = new nControls.deComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.deButtonCancel = new nControls.deButton();
             this.deButtonSave = new nControls.deButton();
@@ -48,16 +50,16 @@ namespace CAG_INWARD
             this.dtpdigi_recipt = new nControls.deDateBox();
             this.cmbdigiRecpt = new nControls.deComboBox();
             this.deLabel14 = new nControls.deLabel();
-            this.cmdShow = new System.Windows.Forms.Button();
-            this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.ckhState = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ckhState);
             this.groupBox3.Controls.Add(this.cmdShow);
             this.groupBox3.Controls.Add(this.cmbBatch);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -67,6 +69,16 @@ namespace CAG_INWARD
             this.groupBox3.TabIndex = 92;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Select Batch";
+            // 
+            // cmdShow
+            // 
+            this.cmdShow.Location = new System.Drawing.Point(504, 9);
+            this.cmdShow.Name = "cmdShow";
+            this.cmdShow.Size = new System.Drawing.Size(101, 23);
+            this.cmdShow.TabIndex = 22;
+            this.cmdShow.Text = "&Show Details";
+            this.cmdShow.UseVisualStyleBackColor = true;
+            this.cmdShow.Click += new System.EventHandler(this.cmdShow_Click);
             // 
             // cmbBatch
             // 
@@ -92,6 +104,19 @@ namespace CAG_INWARD
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Record Entry Details";
+            // 
+            // dgvMain
+            // 
+            this.dgvMain.AllowUserToAddRows = false;
+            this.dgvMain.AllowUserToDeleteRows = false;
+            this.dgvMain.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMain.Location = new System.Drawing.Point(3, 16);
+            this.dgvMain.Name = "dgvMain";
+            this.dgvMain.RowHeadersVisible = false;
+            this.dgvMain.Size = new System.Drawing.Size(993, 332);
+            this.dgvMain.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -289,28 +314,16 @@ namespace CAG_INWARD
             this.deLabel14.TabIndex = 10;
             this.deLabel14.Text = "DIGI CELL RECIPT :";
             // 
-            // cmdShow
+            // ckhState
             // 
-            this.cmdShow.Location = new System.Drawing.Point(504, 9);
-            this.cmdShow.Name = "cmdShow";
-            this.cmdShow.Size = new System.Drawing.Size(101, 23);
-            this.cmdShow.TabIndex = 22;
-            this.cmdShow.Text = "&Show Details";
-            this.cmdShow.UseVisualStyleBackColor = true;
-            this.cmdShow.Click += new System.EventHandler(this.cmdShow_Click);
-            // 
-            // dgvMain
-            // 
-            this.dgvMain.AllowUserToAddRows = false;
-            this.dgvMain.AllowUserToDeleteRows = false;
-            this.dgvMain.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMain.Location = new System.Drawing.Point(3, 16);
-            this.dgvMain.Name = "dgvMain";
-            this.dgvMain.RowHeadersVisible = false;
-            this.dgvMain.Size = new System.Drawing.Size(993, 332);
-            this.dgvMain.TabIndex = 0;
+            this.ckhState.AutoSize = true;
+            this.ckhState.Location = new System.Drawing.Point(623, 13);
+            this.ckhState.Name = "ckhState";
+            this.ckhState.Size = new System.Drawing.Size(73, 17);
+            this.ckhState.TabIndex = 23;
+            this.ckhState.Text = "Outward";
+            this.ckhState.UseVisualStyleBackColor = true;
+            this.ckhState.CheckedChanged += new System.EventHandler(this.ckhState_CheckedChanged);
             // 
             // frmDigiDEPT
             // 
@@ -326,10 +339,11 @@ namespace CAG_INWARD
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmDigiDEPT_Load);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -356,5 +370,6 @@ namespace CAG_INWARD
         private nControls.deLabel deLabel14;
         private System.Windows.Forms.Button cmdShow;
         private System.Windows.Forms.DataGridView dgvMain;
+        private System.Windows.Forms.CheckBox ckhState;
     }
 }
